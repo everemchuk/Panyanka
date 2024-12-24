@@ -1,0 +1,55 @@
+---
+import Header from "@components/Header/Header.tsx";
+import { Image } from "astro:assets";
+import Logo from "@images/logo.svg";
+---
+
+<section class="main">
+		<div class="wrapper">
+			<div class="video__frame">
+				<Header client:only/>
+				<div class="info">
+					<Image src={Logo} alt="Panyanka" class="logo"/>
+				</div>
+			</div>
+		</div>
+</section>
+
+<style lang='sass'>
+
+	@use "sass:math"
+
+	@use '../../styles/utilities.sass' as utils
+	@use '../../styles/variables.sass' as vars
+	
+	.wrapper 
+		width: 100%
+		height: 100svh
+		padding: utils.adaptive(1.67)
+	
+	.video__frame 
+		height: 100%
+		width: 100%
+		border-radius: 20px
+		background-color: vars.$grey
+		position: relative
+
+	.info
+		width: 100%
+		height: 100%
+		position: absolute
+		top: 0
+		left: 0
+		display: flex
+		justify-content: center
+		aligh-items: center
+
+		z-index: 5
+
+	.logo
+		width: 100%
+		height: auto
+		max-width: 200px
+		max-height: 200px
+
+</style>

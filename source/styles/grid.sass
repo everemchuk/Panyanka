@@ -1,0 +1,27 @@
+@use "sass:map"
+@use "utilities.sass" as utils
+  
+// Минимальная ширина страницы
+$minWidth: 320
+// Ширина полотна (макета)
+$maxWidth: 1920
+// Ширина ограничивающего контейнера (0 = нет ограничения)
+$maxWidthContainer: 1300
+// Общий отступ у контейнера
+// (30 = по 15px слева и справа, 0 = нет отступа)
+$containerPadding: 30
+
+// Ширина срабатывания первого брейкпоинта
+$containerWidth: $maxWidthContainer + $containerPadding
+
+// Брейк-поинты
+$breakpoints: ( "pc": utils.em($containerWidth), "tablet": utils.em(991.98), "mobile": utils.em(767.98), "mobileSmall": utils.em(479.98) )
+
+@mixin breakpoint($size, $mode)
+  @if ($mode == "max")
+    @media (max-width: map.get($breakpoints, $size))
+      @content
+  @if ($mode == "min")
+    @media (min-width: map.get($breakpoints, $size))
+      @content
+  

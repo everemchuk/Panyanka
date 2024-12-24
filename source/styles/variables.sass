@@ -1,0 +1,26 @@
+@use "utilities.sass" as utils
+  
+// Шрифт по умолчанию
+$fontFamily: "Kudry"
+$fontSize: utils.rem(16) 
+
+// Основные цвета
+$dark: #1f1f1f
+$darkGrey: #545554
+$grey: #898989
+$lightGrey: #bdbebe
+$light: #f2f3f4
+
+%hover 
+	background-image: linear-gradient(currentColor, currentColor)
+	background-position: 0% 50%
+	background-repeat: no-repeat
+	background-size: 0% 2px
+	transition: background-size .1s
+
+	&:active
+		background-size: 100% 2px
+
+	@include utils.hover
+		background-size: 100% 2px
+		cursor: pointer
