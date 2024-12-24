@@ -25,11 +25,10 @@ body
   font-family: vars.$fontFamily
   font-size: vars.$fontSize
 
-  //overflow-x: hidden
-  .lock
+  [data-scroll="locked"]
     overflow: hidden
     touch-action: none
     overscroll-behavior: none
-  .loaded
+  [data-loaded="true"]
     text-decoration: none
     

@@ -6,8 +6,8 @@ import Logo from "@images/logo.svg";
 
 <section class="main">
 		<div class="wrapper">
-			<div class="video__frame">
-				<Header client:only/>
+			<div class="frame">
+				<Header client:load/>
 				<div class="info">
 					<Image src={Logo} alt="Panyanka" class="logo"/>
 				</div>
@@ -27,7 +27,7 @@ import Logo from "@images/logo.svg";
 		height: 100svh
 		padding: utils.adaptive(1.67)
 	
-	.video__frame 
+	.frame 
 		height: 100%
 		width: 100%
 		border-radius: 20px

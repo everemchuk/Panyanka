@@ -19,6 +19,9 @@
       "@pages/*": [
         "source/pages/*"
       ],
+      "@utils/*": [
+        "source/utilities/*"
+      ],
       "@images/*": [
         "source/assets/images/*"
       ],

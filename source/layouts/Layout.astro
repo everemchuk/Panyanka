@@ -11,7 +11,7 @@ const { titlePage } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{titlePage}</title>
 	</head>
-	<body>
+	<body id="body">
 		<slot />
 	</body>
 </html>
@@ -22,3 +22,10 @@ const { titlePage } = Astro.props;
 	@use "../styles/null.sass"
 	@use "../styles/settings.sass"
 </style>
+
+<script>
+	import deviceDetection from '../utilities/deviceDetection.ts'
+	import { loaded } from '@utils/setup.ts'
+	deviceDetection()
+	loaded()
+</script>
