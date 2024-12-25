@@ -65,17 +65,17 @@ $minWidth: 320;
 $containerWidth: 1330;
 
 // Адаптивное свойство (clamp)
-@mixin adaptiveValue($property, $startSize, $minSize, $keepSize: 0, $widthFrom: $containerWidth, $widthTo: $minWidth) {
+@mixin adaptiveValue($property, $startSize, $endSize, $keepSize: 0, $widthFrom: $containerWidth, $widthTo: $minWidth) {
 	@if ($startSize == 0) {
 		$startSize: 0.000001;
 	}
 
-	@if ($minSize == 0) {
-		$minSize: 0.000001;
+	@if ($endSize == 0) {
+		$endSize: 0.000001;
 	}
 
 	// Для calc();
-	$addSize: math.div($startSize - $minSize, 16);
+	$addSize: math.div($startSize - $endSize, 16);
 
 	// Брейк-поинты в EM
 	$widthFromMedia: em($widthFrom);
@@ -83,8 +83,8 @@ $containerWidth: 1330;
 
 	// Формула плавающего значения
 	// Источник: https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/
-	$slope: math.div(($startSize - $minSize), ($widthFrom - $widthTo));
-	$yIntersection: -$widthTo * $slope + $minSize;
+	$slope: math.div(($startSize - $endSize), ($widthFrom - $widthTo));
+	$yIntersection: -$widthTo * $slope + $endSize;
 	@if ($yIntersection == 0) {
 		$yIntersection: 0.000001;
 	}
@@ -92,10 +92,10 @@ $containerWidth: 1330;
 	$flyValue: #{rem($yIntersection)}" + " #{$slope * 100}vw;
 
 	// Получение значения свойства
-	$propertyValue: #{"clamp(" rem($minSize) "," $flyValue "," rem($startSize) ")"};
+	$propertyValue: #{"clamp(" rem($endSize) "," $flyValue "," rem($startSize) ")"};
 	// Если отрицательные значения
-	@if ($minSize > $startSize) {
-		$propertyValue: #{"clamp(" rem($startSize) "," $flyValue "," rem($minSize) ")"};
+	@if ($endSize > $startSize) {
+		$propertyValue: #{"clamp(" rem($startSize) "," $flyValue "," rem($endSize) ")"};
 	}
 
 	// Устанавливаем значения по умолчанию
@@ -114,13 +114,13 @@ $containerWidth: 1330;
 
 		// Если не поддерживается clamp();
 		@supports not (#{$property}: $propertyValue) {
-			#{$property}: calc(#{rem($minSize)} + #{$addSize} * (100vw - #{rem($widthTo)}) / #{math.div($widthFrom, 16) - math.div($widthTo, 16)});
+			#{$property}: calc(#{rem($endSize)} + #{$addSize} * (100vw - #{rem($widthTo)}) / #{math.div($widthFrom, 16) - math.div($widthTo, 16)});
 		}
 	}
 
 	@if $keepSize != 1 and $keepSize != 2 {
 		@media (max-width: $widthToMedia) {
-			#{$property}: rem($minSize);
+			#{$property}: rem($endSize);
 		}
 	}
 }

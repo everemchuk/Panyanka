@@ -1,7 +1,7 @@
 ---
-import Header from "@components/index/Header.astro";
-import Information from "@components/index/Information.astro";
-import Arrow from "@components/index/Arrow.astro";
+import Header from "@components/index/Main/Header.astro";
+import Information from "@components/index/Main/Information.astro";
+import Arrow from "@components/index/Main/Arrow.astro";
 
 import Video from "../../assets/video.mp4";
 ---
@@ -12,7 +12,7 @@ import Video from "../../assets/video.mp4";
 			<Header />
 			<Information />
 			<Arrow />
-			<video src={Video} class="video" autoplay muted></video>
+			<video src={Video} class="video" autoplay loop muted />
 		</div>
 	</div>
 </section>

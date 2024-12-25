@@ -1,0 +1,206 @@
+---
+
+---
+
+<header class="header">
+	<div class="header__menu" id="header__menu"><span>Menu</span></div>
+	<nav class="header__desktop" id="header__desktop">
+		<ul>
+			<li><a href="#">Collections</a></li>
+			<li><a href="#">Blog</a></li>
+			<li><a href="#">About us</a></li>
+			<li><a href="#">Contact us</a></li>
+			<li id="close__desktop"><span>&times;</span></li>
+		</ul>
+	</nav>
+	<nav class="header__mobile" id="header__mobile">
+		<ul>
+			<li><a href="#">Collections</a></li>
+			<li><a href="#">Blog</a></li>
+			<li><a href="#">About us</a></li>
+			<li><a href="#">Contact us</a></li>
+			<li id="close__mobile"><a href="#">&times;</a></li>
+		</ul>
+	</nav>
+</header>
+
+<style lang="scss">
+
+	@use '../styles/utilities.scss' as utils;
+	@use '../styles/grid.scss' as grid;
+	@use '../styles/variables.scss' as vars;
+
+	%template-header {
+		padding: utils.adaptive(.9) utils.adaptive(2.5);
+		border-bottom-left-radius: utils.adaptive(2);
+		border-bottom-right-radius: utils.adaptive(2);
+		background-color: var(--theme-background);
+
+		user-select: none;
+
+		color: var(--theme-element);
+		font-size: utils.adaptive(1.7);
+
+		@include grid.breakpoint("tablet", "max") {
+			padding: utils.adaptive(1.2) utils.adaptive(3);
+			font-size: utils.adaptive(2);
+		}
+	}
+
+	.header {
+		display: flex;
+		justify-content: center;
+		transform: translateY(-2%);
+		position: static;
+		transform: none;
+
+		z-index: 2;
+
+		&__menu {
+			@extend %template-header;
+			& > span {
+				@extend %hover;
+			}
+		}
+
+		&__desktop {
+
+			@extend %template-header;
+
+			@include grid.breakpoint("tablet", "max") {
+				display: none;
+			}
+
+			& > ul {
+				display: flex;
+				gap: utils.adaptive(2);
+				& > li:not(:last-child) {
+					@extend %hover;
+				}
+				& > li:last-child {
+					padding: 0px 10px;
+					transform-origin: center center;
+					transition: transform .2s linear;
+					font-size: utils.adaptive(2);
+					@include utils.hover {
+						cursor: pointer;
+						transform: rotate(180deg);
+					}
+				}
+			}
+		}
+
+		&__mobile {
+
+			@extend %template-header;
+
+			@include grid.breakpoint("tablet", "max") {
+				display: block;
+			}
+
+			@include grid.breakpoint("mobileSmall", "max") {
+				font-size: utils.adaptive(3);
+			}
+
+			position: absolute;
+			height: 100%;
+			width: 95%;
+
+			text-align: center;
+			& > ul {
+				height: 100%;
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				gap: utils.adaptive(2);
+				& > li:not(:last-child) {
+					@extend %hover;
+				}
+				& > li:last-child {
+					position: absolute;
+					top: 10%;
+					left: 50%;
+					transform: translateX(-50%);
+					font-size: utils.adaptive(4);
+				}
+			}
+		}
+	}
+
+	@keyframes slideUp {
+		from {
+			transform: translateY(-2%);
+		}
+		to {
+			transform: translateY(-70%);
+		}
+	}
+	@keyframes slideDown {
+		from {
+			transform: translateY(-70%);
+		}
+		to {
+			transform: translateY(-2%);
+		}
+	}
+
+	[data-state="open"] {
+		animation: slideDown .5s forwards;
+		display: block;
+	}
+	[data-state="closed"] {
+		animation: slideUp .5s forwards;
+		display: none;
+	}
+
+</style>
+
+<script>
+
+	const body: HTMLElement = document.getElementById('body')!
+
+	const menu: HTMLElement = document.getElementById("header__menu")!
+
+	const navigationDesktop: HTMLElement = document.getElementById("header__desktop")!
+	const closeDesktop: HTMLElement = document.getElementById("close__desktop")!
+
+	const navigationMobile: HTMLElement = document.getElementById("header__mobile")!
+	const closeMobile: HTMLElement = document.getElementById("close__mobile")!
+
+	menu.dataset.state = "open"
+	navigationDesktop.dataset.state = "closed"
+	navigationMobile.dataset.state = "closed"
+
+	menu.addEventListener("click", () => {
+		if (body.dataset.device === "_desktop") {
+			menu.dataset.state === "open"
+				? (menu.dataset.state = "closed")
+				: (menu.dataset.state = "open")
+			navigationDesktop.dataset.state === "closed"
+				? (navigationDesktop.dataset.state = "open")
+				: (navigationMobile.dataset.state = "closed")
+		}
+
+		if(body.dataset.device === "_mobile") {
+			menu.dataset.state === "open"
+				? (menu.dataset.state = "closed")
+				: (menu.dataset.state = "open")
+			navigationMobile.dataset.state === "closed"
+				? (navigationMobile.dataset.state = "open")
+				: (navigationMobile.dataset.state = "closed")
+		}
+	})
+
+	closeDesktop.addEventListener("click", () => {
+		navigationDesktop.dataset.state = "closed"
+		menu.dataset.state = "open"
+	})
+
+	closeMobile.addEventListener("click", () => {
+		navigationMobile.dataset.state = "closed"
+		menu.dataset.state = "open"
+	})
+
+</script>
