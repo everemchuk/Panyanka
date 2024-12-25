@@ -1,0 +1,43 @@
+
+@use "variables.scss" as vars;
+@use "grid.scss" as grid;
+
+:root {
+  --theme-background: none;
+  --theme-element: none;
+  --theme-text: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --theme-background: #{vars.$dark};
+    --theme-element: #{vars.$light};
+    --theme-text: #{vars.$light};
+  }
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --theme-background: #{vars.$light};
+    --theme-element: #{vars.$dark};
+    --theme-text: #{vars.$dark};
+  }
+}
+  
+body {
+  background-color: var(--theme-background);
+  color: var(--theme-text);
+
+  font-family: vars.$fontFamily;
+  font-size: vars.$fontSize;
+
+  [data-scroll="locked"] {
+    overflow: hidden;
+    touch-action: none;
+    overscroll-behavior: none;
+  }
+  [data-loaded="true"] {
+    text-decoration: none;
+  }
+}
+
+    

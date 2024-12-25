@@ -1,0 +1,40 @@
+---
+const { titleButton } = Astro.props;
+---
+
+<div class="button">
+	<a class="button__link" href="#">{titleButton}</a>
+</div>
+
+<style lang="scss">
+	@use "../styles/utilities.scss" as utils;
+	@use "../styles/grid.scss" as grid;
+
+	.button {
+		display: inline-block;
+
+		&__link {
+			background-color: var(--theme-element);
+			color: var(--theme-background);
+
+			padding: utils.adaptive(.7) utils.adaptive(2.5);
+			border-radius: 50px;
+
+			font-size: utils.adaptive(1);
+
+			transition: background-color .2s ease-in-out;
+			transition: color .2s ease-in-out;
+
+			&:hover {
+				background-color: var(--theme-background);
+				color: var(--theme-element);
+			}
+			@include grid.breakpoint("tablet", "max") {
+				padding: utils.adaptive(1.1) utils.adaptive(3.5);
+				font-size: utils.adaptive(2);
+
+				border-radius: 65px;
+			}
+		}
+	}
+</style>

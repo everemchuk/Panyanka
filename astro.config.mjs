@@ -1,7 +1,5 @@
 import { defineConfig } from 'astro/config';
 
-import react from '@astrojs/react';
-
 export default defineConfig({
   publicDir: './public',
   srcDir: './source',
@@ -10,7 +8,6 @@ export default defineConfig({
     port: 3000,
     host: true,
   },
-  integrations: [react()],
   devToolbar: {
     enabled: false
   },

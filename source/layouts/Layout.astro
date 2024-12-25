@@ -16,16 +16,16 @@ const { titlePage } = Astro.props;
 	</body>
 </html>
 
-<style lang='sass' is:global>
-	@use "../styles/fonts.sass"
-	@use "../styles/icons.sass"
-	@use "../styles/null.sass"
-	@use "../styles/settings.sass"
+<style lang="scss" is:global>
+	@use "../styles/fonts.scss";
+	@use "../styles/icons.scss";
+	@use "../styles/null.scss";
+	@use "../styles/settings.scss";
 </style>
 
 <script>
-	import deviceDetection from '../utilities/deviceDetection.ts'
-	import { loaded } from '@utils/setup.ts'
-	deviceDetection()
-	loaded()
+	import deviceDetection from "../utilities/deviceDetection.ts";
+	import { loaded } from "@utils/setup.ts";
+	deviceDetection();
+	loaded();
 </script>

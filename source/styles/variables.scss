@@ -1,0 +1,12 @@
+@use "utilities.scss" as utils;
+  
+// Шрифт по умолчанию
+$fontFamily: "Kudry";
+$fontSize: utils.rem(16);
+
+// Основные цвета
+$dark: #1f1f1f;
+$darkGrey: #545554;
+$grey: #898989;
+$lightGrey: #bdbebe;
+$light: #f2f3f4;

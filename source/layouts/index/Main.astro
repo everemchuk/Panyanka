@@ -1,55 +1,57 @@
 ---
-import Header from "@components/Header/Header.tsx";
-import { Image } from "astro:assets";
-import Logo from "@images/logo.svg";
+import Header from "@components/index/Header.astro";
+import Information from "@components/index/Information.astro";
+import Arrow from "@components/index/Arrow.astro";
+
+import Video from "../../assets/video.mp4";
 ---
 
 <section class="main">
-		<div class="wrapper">
-			<div class="frame">
-				<Header client:load/>
-				<div class="info">
-					<Image src={Logo} alt="Panyanka" class="logo"/>
-				</div>
-			</div>
+	<div class="wrapper">
+		<div class="frame">
+			<Header />
+			<Information />
+			<Arrow />
+			<video src={Video} class="video" autoplay muted></video>
 		</div>
+	</div>
 </section>
 
-<style lang='sass'>
+<style lang="scss">
+	@use "sass:math";
 
-	@use "sass:math"
+	@use "../../styles/utilities.scss" as utils;
+	@use "../../styles/variables.scss" as vars;
 
-	@use '../../styles/utilities.sass' as utils
-	@use '../../styles/variables.sass' as vars
-	
-	.wrapper 
-		width: 100%
-		height: 100svh
-		padding: utils.adaptive(1.67)
-	
-	.frame 
-		height: 100%
-		width: 100%
-		border-radius: 20px
-		background-color: vars.$grey
-		position: relative
+	.wrapper {
+		width: 100%;
+		height: 100svh;
+		padding: utils.adaptive(1.67);
+	}
 
-	.info
-		width: 100%
-		height: 100%
-		position: absolute
-		top: 0
-		left: 0
-		display: flex
-		justify-content: center
-		aligh-items: center
+	.frame {
+		height: 100%;
+		width: 100%;
+		border-radius: 20px;
 
-		z-index: 5
+		position: relative;
 
-	.logo
-		width: 100%
-		height: auto
-		max-width: 200px
-		max-height: 200px
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+	}
 
+	.video {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		border-radius: 20px;
+		object-fit: cover;
+		z-index: 0;
+
+		filter: brightness(30%);
+	}
 </style>

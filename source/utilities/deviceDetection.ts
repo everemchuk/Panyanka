@@ -2,16 +2,19 @@ function isDevice(): string {
   const regex: RegExp = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
   const isMobile: boolean = regex.test(navigator.userAgent)
 
-	let device: string = ''
-	const body = <HTMLElement>document.getElementById('body')
+	isMobile ? document.body.dataset.device = '_mobile' : document.body.dataset.device = '_desktop'
 
-	if (isMobile) {
-		device = 'mobile'
-		body.dataset.device = '_mobile'
-	} else {
-		device = 'desktop'
-		body.dataset.device = '_desktop'
-	}
+	let device: string = ''
+
+	addEventListener("resize", (event) => {
+		if (window.innerWidth <= 1025) {
+			device = 'mobile'
+			document.body.dataset.device = '_mobile'
+		} else {
+			device = 'desktop'
+			document.body.dataset.device = '_desktop'
+		}
+	})
 
 	return device
 }
